@@ -1,0 +1,22 @@
+{% for item in all_vars %}
+
+router bgp {{ item.leaf_asn }}
+   router-id {{ item.loopback0_ip }}
+   no bgp default ipv4-unicast
+   bgp log-neighbor-changes
+   distance bgp 20 200 200
+   neighbor underlay peer-group
+   neighbor underlay remote-as 65000
+   neighbor underlay maximum-routes 12000
+   neighbor {{ item.p2p_spine1_ip }} peer-group underlay
+   neighbor {{ item.p2p_spine2_ip }} peer-group underlay
+   neighbor underlay_ibgp remote-as {{ item.leaf_asn }}
+   neighbor underlay_ibgp maximum-routes 12000
+   neighbor underlay_ibgp next-hop-self
+   neighbor {{ item.mlag_ibgp_peer_ip }} peer-group underlay_ibgp
+   address-family ipv4
+      neighbor underlay activate
+      neighbor underlay_ibgp activate
+      network {{ item.loopback0_ip }}/32
+      maximum-paths 4 ecmp 64
+{% endfor %}

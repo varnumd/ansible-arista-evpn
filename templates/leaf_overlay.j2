@@ -1,0 +1,27 @@
+{% for item in all_vars %}
+
+service routing protocols model multi-agent
+
+interface Loopback1
+   ip address {{ item.loopback1_ip }}/32
+
+router bgp {{ item.leaf_asn }}
+   neighbor evpn peer-group
+   neighbor evpn remote-as 65000
+   neighbor evpn update-source Loopback0
+   neighbor evpn ebgp-multihop 3
+   neighbor evpn send-community extended
+   neighbor evpn maximum-routes 12000
+   neighbor {{ item.spine1_loop0 }} peer-group evpn
+   neighbor {{ item.spine2_loop0 }} peer-group evpn
+   !
+   address-family evpn
+      neighbor evpn activate
+      network {{ item.loopback1_ip }}/32
+
+interface vxlan1
+   vxlan source-interface Loopback1
+   vxlan udp-port 4789
+   vxlan learn-restrict any
+
+{% endfor %}

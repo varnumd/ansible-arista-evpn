@@ -1,0 +1,34 @@
+{% for item in all_vars %}
+interface Ethernet 11
+   description spine-1
+   no switchport
+   ip address {{ item.p2p_leaf_ip_spine1 }}/31
+   mtu 9214
+   no shutdown
+   exit
+
+interface Ethernet 12
+   description spine-2
+   no switchport
+   ip address {{ item.p2p_leaf_ip_spine2 }}/31
+   mtu 9214
+   no shutdown
+   exit
+
+vlan 4091
+   name mlag-ibgp
+   trunk group mlag-peer
+
+interface vlan 4091
+   ip address {{ item.ibgp_ip }}/31
+   no autostate
+   mtu 9214
+   no shutdown
+   exit
+
+no spanning-tree vlan 4091
+
+interface loopback0
+   ip address {{ item.loopback0_ip }}/32
+
+{% endfor %}

@@ -1,0 +1,10 @@
+{% for item in underlay_interfaces %}
+interface {{ item.interface }}
+   description {{ item.description }}
+   no switchport
+   ip address {{ item.address }}/31
+   mtu 9214
+   no shutdown
+   exit
+
+{% endfor %}

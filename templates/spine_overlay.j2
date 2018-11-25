@@ -1,0 +1,33 @@
+{% for item in all_vars %}
+
+service routing protocols model multi-agent
+
+router bgp 65000
+   neighbor evpn peer-group
+   neighbor evpn next-hop-unchanged
+   neighbor evpn update-source Loopback0
+   neighbor evpn ebgp-multihop 3
+   neighbor evpn send-community extended
+   neighbor evpn maximum-routes 12000
+   neighbor {{ item.leaf1_loop0 }} peer-group evpn
+   neighbor {{ item.leaf1_loop0 }} remote-as {{ item.leaf1_bgp_asn }}
+   neighbor {{ item.leaf2_loop0 }} peer-group evpn
+   neighbor {{ item.leaf2_loop0 }} remote-as {{ item.leaf2_bgp_asn }}
+   neighbor {{ item.leaf3_loop0 }} peer-group evpn
+   neighbor {{ item.leaf3_loop0 }} remote-as {{ item.leaf3_bgp_asn }}
+   neighbor {{ item.leaf4_loop0 }} peer-group evpn
+   neighbor {{ item.leaf4_loop0 }} remote-as {{ item.leaf4_bgp_asn }}
+   neighbor {{ item.leaf5_loop0 }} peer-group evpn
+   neighbor {{ item.leaf5_loop0 }} remote-as {{ item.leaf5_bgp_asn }}
+   neighbor {{ item.leaf6_loop0 }} peer-group evpn
+   neighbor {{ item.leaf6_loop0 }} remote-as {{ item.leaf6_bgp_asn }}
+   neighbor {{ item.leaf7_loop0 }} peer-group evpn
+   neighbor {{ item.leaf7_loop0 }} remote-as {{ item.leaf7_bgp_asn }}
+   neighbor {{ item.leaf8_loop0 }} peer-group evpn
+   neighbor {{ item.leaf8_loop0 }} remote-as {{ item.leaf8_bgp_asn }}
+   !
+   address-family evpn
+      neighbor evpn activate
+
+
+{% endfor %}

@@ -1,0 +1,7 @@
+eos_connection:
+  host: "{{ inventory_hostname }}"
+  username: ansible
+  password: automation
+  transport: cli
+  use_ssl: true
+  validate_certs: False

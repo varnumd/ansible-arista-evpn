@@ -1,0 +1,16 @@
+---
+- hosts: leaf-1
+  connection: local
+  gather_facts: no
+
+  tasks:
+    - name: Gather info from Show Version
+      eos_command:
+        commands: 'show version'
+        provider: '{{ eos_connection }}'
+
+      register: output
+
+    - name: show output
+      debug:
+        var: output

@@ -1,0 +1,21 @@
+---
+- hosts: eos-spines
+  connection: local
+  gather_facts: no
+
+  tasks:
+  - name: Configure Overlay
+    eos_config:
+      src: spine_overlay.j2
+      provider: "{{ eos_connection }}"
+
+- hosts: eos-leafs
+  connection: local
+  gather_facts: no
+
+  tasks:
+  - name: Configure Overlay
+    eos_config:
+      src: leaf_overlay.j2
+      provider: "{{ eos_connection }}"
+

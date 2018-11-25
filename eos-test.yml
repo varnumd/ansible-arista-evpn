@@ -1,0 +1,25 @@
+---
+- name: Arista
+  hosts: all
+  gather_facts: false
+  connection: local
+
+  vars:
+    cli:
+      host: "{{ inventory_hostname }}"
+      username: ansible
+      password: automation
+      authorize: true
+      transport: cli
+
+  tasks:
+    - name: show version
+      eos_command:
+        commands: show version
+        provider: "{{ cli }}"
+
+      register: output
+
+    - name: show output
+      debug:
+        var: output

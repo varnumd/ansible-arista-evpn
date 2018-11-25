@@ -1,0 +1,32 @@
+{% for item in all_vars %}
+
+interface loopback0
+   ip address {{ item.loopback0_ip }}/32
+
+router bgp 65000
+   router-id {{ item.loopback0_ip }}
+   no bgp default ipv4-unicast
+   bgp log-neighbor-changes
+   distance bgp 20 200 200
+   neighbor {{ item.p2p_leaf1_ip }} remote-as {{ item.leaf1_bgp_asn }}
+   neighbor {{ item.p2p_leaf2_ip }} remote-as {{ item.leaf2_bgp_asn }}
+   neighbor {{ item.p2p_leaf3_ip }} remote-as {{ item.leaf3_bgp_asn }}
+   neighbor {{ item.p2p_leaf4_ip }} remote-as {{ item.leaf4_bgp_asn }}
+   neighbor {{ item.p2p_leaf5_ip }} remote-as {{ item.leaf5_bgp_asn }}
+   neighbor {{ item.p2p_leaf6_ip }} remote-as {{ item.leaf6_bgp_asn }}
+   neighbor {{ item.p2p_leaf7_ip }} remote-as {{ item.leaf7_bgp_asn }}
+   neighbor {{ item.p2p_leaf8_ip }} remote-as {{ item.leaf8_bgp_asn }}
+   !
+   address-family ipv4
+      neighbor {{ item.p2p_leaf1_ip }} activate
+      neighbor {{ item.p2p_leaf2_ip }} activate
+      neighbor {{ item.p2p_leaf3_ip }} activate
+      neighbor {{ item.p2p_leaf4_ip }} activate
+      neighbor {{ item.p2p_leaf5_ip }} activate
+      neighbor {{ item.p2p_leaf6_ip }} activate
+      neighbor {{ item.p2p_leaf7_ip }} activate
+      neighbor {{ item.p2p_leaf8_ip }} activate
+      network {{ item.loopback0_ip }}/32
+      maximum-paths 4 ecmp 64
+
+{% endfor %}

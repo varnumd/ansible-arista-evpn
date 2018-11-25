@@ -1,0 +1,52 @@
+underlay_interfaces:
+  - interface: Ethernet1
+    description: leaf-1
+    address: 10.0.2.0
+  - interface: Ethernet2
+    description: leaf-2
+    address: 10.0.2.2
+  - interface: Ethernet3
+    description: leaf-3
+    address: 10.0.2.4
+  - interface: Ethernet4
+    description: leaf-4
+    address: 10.0.2.6
+  - interface: Ethernet5
+    description: leaf-5
+    address: 10.0.2.8
+  - interface: Ethernet6
+    description: leaf-6
+    address: 10.0.2.10
+  - interface: Ethernet7
+    description: leaf-7
+    address: 10.0.2.12
+  - interface: Ethernet8
+    description: leaf-8
+    address: 10.0.2.14
+
+all_vars:
+  - p2p_leaf1_ip: 10.0.2.1
+    p2p_leaf2_ip: 10.0.2.3
+    p2p_leaf3_ip: 10.0.2.5
+    p2p_leaf4_ip: 10.0.2.7
+    p2p_leaf5_ip: 10.0.2.9
+    p2p_leaf6_ip: 10.0.2.11
+    p2p_leaf7_ip: 10.0.2.13
+    p2p_leaf8_ip: 10.0.2.15
+    leaf1_bgp_asn: 65001
+    leaf2_bgp_asn: 65001
+    leaf3_bgp_asn: 65002
+    leaf4_bgp_asn: 65002
+    leaf5_bgp_asn: 65003
+    leaf6_bgp_asn: 65003
+    leaf7_bgp_asn: 65004
+    leaf8_bgp_asn: 65004
+    loopback0_ip: 10.0.250.2
+    leaf1_loop0: 10.0.250.11
+    leaf2_loop0: 10.0.250.12
+    leaf3_loop0: 10.0.250.13
+    leaf4_loop0: 10.0.250.14
+    leaf5_loop0: 10.0.250.15
+    leaf6_loop0: 10.0.250.16
+    leaf7_loop0: 10.0.250.17
+    leaf8_loop0: 10.0.250.18

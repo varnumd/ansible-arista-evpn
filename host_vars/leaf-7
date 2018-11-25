@@ -1,0 +1,18 @@
+all_vars:
+ - p2p_leaf_ip_spine1: 10.0.1.13
+   p2p_spine1_ip: 10.0.1.12
+   spine1_int: Et7
+   p2p_leaf_ip_spine2: 10.0.2.13
+   p2p_spine2_ip: 10.0.2.12
+   spine2_int: Et7
+   ibgp_ip: 10.0.3.6
+   loopback0_ip: 10.0.250.17
+   leaf_asn: 65004
+   mlag_ibgp_peer_ip: 10.0.3.7
+   spine1_loop0: 10.0.250.1
+   spine2_loop0: 10.0.250.2
+   loopback1_ip: 10.0.255.14
+   spine_asn: 65000
+   mlag_octet: 254
+   mlag_peer_octet: 255
+

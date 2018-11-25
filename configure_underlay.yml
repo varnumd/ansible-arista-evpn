@@ -1,0 +1,36 @@
+---
+- hosts: eos-spines
+  connection: local
+  gather_facts: no
+
+  tasks:
+  - name: Configure Underlay Interfaces
+    eos_config:
+      src: spine_underlay_interfaces.j2
+      provider: "{{ eos_connection }}"
+
+  - name: Configure Underlay BGP
+    eos_config:
+      src: spine_underlay_bgp2.j2
+      provider: "{{ eos_connection }}"
+
+- hosts: eos-leafs
+  connection: local
+  gather_facts: no
+
+  tasks:
+  - name: Configure MLAG
+    eos_config:
+      src: mlag.j2
+      provider: "{{ eos_connection }}"
+
+  - name: Configure Underlay Interfaces
+    eos_config:
+      src: leaf_underlay_interfaces.j2
+      provider: "{{ eos_connection }}"
+
+  - name: Configure Underlay BGP
+    eos_config:
+      src: leaf_underlay_bgp.j2
+      provider: "{{ eos_connection }}"
+

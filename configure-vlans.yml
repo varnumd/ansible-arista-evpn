@@ -1,0 +1,11 @@
+---
+- hosts: leaf-1
+  connection: local
+  gather_facts: no
+
+  tasks:
+  - name: Configure Arista Vlans
+    eos_config:
+      src: vlans.j2
+      provider: "{{ eos_connection }}"
+
